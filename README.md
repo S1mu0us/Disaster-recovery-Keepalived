@@ -35,11 +35,10 @@
 #standby 1 track GigabitEthernet0/0
 #exit
 ```
-Итоговый [файл](hsrp_advanced_hw1.pkt)
 
 <img src = "img/image1.png">
 
-
+Итоговый [файл](hsrp_advanced_hw1.pkt)
 ---
 
 ### Задание 2
