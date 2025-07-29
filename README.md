@@ -1,4 +1,4 @@
-# Домашнее задание к занятию "`Disaster recovery и Keepalived`" - `Янин Семён Васильевич`
+# [Домашнее задание](https://github.com/netology-code/sflt-homeworks/blob/main/1.md) к занятию "`Disaster recovery и Keepalived`" - `Янин Семён Васильевич`
 
 
 ### Инструкция по выполнению домашнего задания
@@ -69,9 +69,59 @@ fi
 exit 0
 ```
 
-`При необходимости прикрепитe сюда скриншоты
-![Название скриншота 2](ссылка на скриншот 2)`
+конфиг-файл для keepalived
+---
+```
+global_defs {
+        script_user root
+        enable_script_security
+}
 
+vrrp_script proverka {
+        script "/usr/local/bin/proverka.sh"
+        interval 3
+        timeout 1
+        rise 2
+        fall 2
+}
+
+vrrp_instance VI_1 {
+        state MASTER
+        interface eth0
+        virtual_router_id 15
+        priority 255
+        advert_int 1
+
+        virtual_ipaddress {
+              192.168.111.15/24
+        }
+        unicast_src_ip 10.129.0.17
+        unicast_peer {
+                10.129.0.3
+        }
+
+        track_script {
+                proverka
+        }
+
+}
+```
+Для второй ВМ аналогично, но с изменением статуса `state MASTER` >> `state BACKUP`, приоритетом `priority 255` >> `priority 200` и ip в юникасте (поменяются местами)
+
+проверка состояния keepalived
+---
+<img src = "img/image2.png">
+
+<img src = "img/image3.png">
+
+демонстрация работы плавающего ip
+---
+Отключили nginx
+<img src = "img/image4.png">
+
+
+Вернули nginx и удалили index.html
+<img src = "img/image5.png">
 
 ---
 
