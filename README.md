@@ -38,7 +38,7 @@
 
 <img src = "img/image1.png">
 
-Итоговая [схема](hsrp_advanced_hw1.pkt)
+Итоговый файл со схемой: [hsrp_advanced_hw1.pkt](hsrp_advanced_hw1.pkt)
 
 ---
 
